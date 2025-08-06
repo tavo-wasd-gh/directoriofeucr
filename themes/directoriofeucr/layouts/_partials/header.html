@@ -1,0 +1,6 @@
+{{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+{{ with .Resources.GetMatch .Params.banner }}
+<div class="banner">
+  <img src="{{ .RelPermalink }}"/>
+</div>
+{{ end }}

@@ -1,0 +1,10 @@
+baseURL = 'https://directoriofeucr.ucr.ac.cr/'
+languageCode = 'es'
+title = 'Directorio FEUCR'
+theme = 'directoriofeucr'
+
+defaultContentLanguage = 'es'
+[languages]
+  [languages.es]
+    languageName = 'Spanish'
+    weight = 1
