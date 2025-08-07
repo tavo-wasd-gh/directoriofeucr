@@ -4,7 +4,7 @@
   --axiom-color-background-secondary: #e2e2e2;
 
   /* text */
-  --axiom-font-family-sans: sans;
+  --axiom-font-family-sans: "Inter", "Arial", sans;
   --axiom-font-family-serif: serif;
 
   /* color */
@@ -35,7 +35,7 @@
   :root {
     /* background */
     --axiom-color-background: #13171F;
-    --axiom-color-background-secondary: #e2e2e2;
+    --axiom-color-background-secondary: #2a3140;
 
     /* color */
     --axiom-color: #c2c7d0;
@@ -49,12 +49,15 @@
   }
 }
 
-* {
-  background-color: var(--axiom-color-background);
-  color: var(--axiom-color);
+@media screen and (width <= 768px) {
+  button:not([rel="prev"]) {
+    width: 100% !important;
+  }
 }
 
 body {
+  background-color: var(--axiom-color-background);
+  color: var(--axiom-color);
   font-family: var(--axiom-font-family-sans);
   text-align: left;
   line-height: 1.5rem;
@@ -99,8 +102,25 @@ a {
   color: var(--axiom-color-link);
 }
 
+strong, em,
+sub, sup {
+  color: var(--axiom-color);
+}
+
 header {
   padding: var(--axiom-padding) 0;
+}
+
+.carousel {
+  display: flex;
+  gap: var(--axiom-padding);
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.carousel > * {
+  flex: 1 1 0;
+  min-width: min-content;
 }
 
 nav {
@@ -156,17 +176,22 @@ form div {
   align-items: center;
 }
 
+label {
+  color: var(--axiom-color);
+}
+
 input,
 button,
 select,
 textarea {
+  font-family: var(--axiom-font-family-sans);
   box-sizing: border-box;
   color: var(--axiom-color);
   white-space: nowrap;
   font-size: 1.1rem;
   width: 100%;
   margin: calc(var(--axiom-padding) * .5) 0;
-  padding: var(--axiom-padding);
+  padding: calc(var(--axiom-padding) * .5) calc(var(--axiom-padding) * 0.8);
   border: var(--axiom-border);
   border-radius: var(--axiom-border-radius);
   background-color: #00000002;
@@ -185,6 +210,8 @@ canvas {
 }
 
 button {
+  width: max-content;
+  font-weight: 600;
   background-color: var(--axiom-color-button);
   border-color: var(--axiom-color-button);
   color: var(--axiom-color-button-fg);
@@ -264,6 +291,7 @@ details[open] summary::after {
 }
 
 table {
+  color: var(--axiom-color);
   width: 100%;
   margin: var(--axiom-padding) 0;
   border-collapse: collapse;
@@ -333,26 +361,13 @@ dialog > article > header :is(a, button)[rel="prev"] {
   background-color: transparent;
 }
 
-.carousel {
-  display: flex;
-  gap: var(--axiom-padding);
-  overflow-x: auto;
-  max-width: 100%;
-}
-
-.carousel > * {
-  flex: 1 1 0;
-  min-width: min-content;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
-  grid-column-gap: var(--axiom-padding);
-  grid-row-gap: var(--axiom-padding);
+  gap: var(--axiom-padding);
 }
 
-[aria-busy="true"]:not(input, textarea, html, form)::before {
+[aria-busy="true"]:not(input, textarea, html, form)::after {
   margin-right: 0.5em;
   display: inline-block;
   width: 1em;
@@ -364,6 +379,15 @@ dialog > article > header :is(a, button)[rel="prev"] {
   vertical-align: -.125em;
 }
 
-[aria-busy="true"]:not(input, textarea):is(button, [type="submit"], [type="button"], [type="reset"], [role="button"]):not(.outline)::before {
+[aria-busy="true"]:not(input, textarea):is(button, [type="submit"], [type="button"], [type="reset"], [role="button"]):not(.outline)::after {
   filter: brightness(0) invert(1);
+}
+
+.clickable {
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.clickable:hover {
+  background-color: var(--axiom-color-background-secondary);
 }

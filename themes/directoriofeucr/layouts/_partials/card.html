@@ -1,17 +1,15 @@
-<div class="card">
-  <a href="{{ .RelPermalink }}">
-    {{ with .Resources.GetMatch .Params.banner }}
-    <img src="{{ .RelPermalink }}"/>
+<div class="card" onclick="location.href='{{ .RelPermalink }}'">
+  {{ with .Resources.GetMatch .Params.banner }}
+  <img src="{{ .RelPermalink }}"/>
+  {{ end }}
+  <div class="container">
+    <strong>{{ .LinkTitle }}</strong>
+    {{ with .Date }}
+    {{ $dateMachine := . | time.Format "2006-01-02T15:04:05-07:00" }}
+    {{ $dateHuman := . | time.Format ":date_short" }}
+    <span> • <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time></span>
     {{ end }}
-    <div class="container">
-      <strong>{{ .LinkTitle }}</strong>
-      {{ with .Date }}
-      {{ $dateMachine := . | time.Format "2006-01-02T15:04:05-07:00" }}
-      {{ $dateHuman := . | time.Format ":date_short" }}
-      <span> • <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time></span>
-      {{ end }}
-      {{ .Summary | safeHTML | truncate 140 }}
-      {{ partial "terms.html" (dict "taxonomy" "tags" "page" . "homepage" true) }}
-    </div>
-  </a>
+    {{ .Summary | safeHTML | truncate 140 }}
+    {{ partial "terms.html" (dict "taxonomy" "tags" "page" . "homepage" true) }}
+  </div>
 </div>
